@@ -117,7 +117,7 @@ static void drawTitle(sf::RenderTarget& rt, const sf::Font& font, float timer)
     Renderer::drawTextShadow(rt, font, "DUNOPIA",
         W / 2.f + 65.f, tpy + 55.f, 66,
         Palette::TEXT_GOLD, true, true);
-    Renderer::drawText(rt, font, "A Filipino History Platformer",
+    Renderer::drawText(rt, font, "Karunungan ang Kalayaan",
         W / 2.f + 65.f, tpy + 126.f, 20,
         Palette::TEXT_DIM, false, true);
 
@@ -142,8 +142,8 @@ static void drawTitle(sf::RenderTarget& rt, const sf::Font& font, float timer)
         float ry = cpy + 35.f + i * 22.f;
         Renderer::drawText(rt, font, rows[i].key,
                            cpx + 12.f, ry, 14, Palette::TEXT_GOLD, true);
-        Renderer::drawText(rt, font, std::string("—  ") + rows[i].desc,
-                           cpx + 195.f, ry, 14, Palette::TEXT_MAIN);
+        Renderer::drawText(rt, font, std::string("- ") + rows[i].desc,
+                   cpx + 195.f, ry, 14, Palette::TEXT_MAIN);
     }
 
     // Blinking start prompt
@@ -221,19 +221,9 @@ static void drawVictory(sf::RenderTarget& rt, const sf::Font& font,
     int W = Config::SCREEN_W, H = Config::SCREEN_H;
 
     // Warm sunrise gradient
-    for (int i = 0; i < H; i += 4)
-    {
-        float t = static_cast<float>(i) / H;
-        rt.draw(Renderer::rect(0.f, static_cast<float>(i),
-            static_cast<float>(W), 5.f,
-            sf::Color(
-                static_cast<sf::Uint8>(218 * (1.f - t * 0.4f)),
-                static_cast<sf::Uint8>(128 + 82 * t),
-                static_cast<sf::Uint8>(18  + 32 * t)
-            )));
-    }
+    rt.draw(Renderer::rect(0, 0, W, H, sf::Color(0, 0, 0)));
 
-    Renderer::drawRizal(rt, W / 2.f - 28.f, H / 2.f - 55.f, 2.f);
+    Renderer::drawRizal(rt, W / 2.f - 28.f, H / 2.f + 40.f, 2.f);
     fx.drawScreen(rt);
 
     constexpr float PW = 530.f, PH = 185.f;
@@ -245,10 +235,8 @@ static void drawVictory(sf::RenderTarget& rt, const sf::Font& font,
     rt.draw(Renderer::rect(px - 1, py - 1, PW + 2, 50.f, sf::Color(85, 58, 5)));
     rt.draw(Renderer::rect(px - 1, py + 48.f, PW + 2, 2.f, Palette::UI_BORDER2));
 
-    Renderer::drawTextShadow(rt, font, "KALAYAAN!",
+    Renderer::drawTextShadow(rt, font, "VICTORY!",
         W / 2.f, py + 12.f, 28, Palette::TEXT_GOLD, true, true);
-    Renderer::drawText(rt, font, "Jose Rizal has reached freedom!",
-        W / 2.f, py + 64.f, 18, Palette::TEXT_MAIN, false, true);
     Renderer::drawTextShadow(rt, font,
         "Final Score: " + std::to_string(score),
         W / 2.f, py + 96.f, 28, Palette::TEXT_GOLD, true, true);
@@ -261,9 +249,9 @@ static void drawVictory(sf::RenderTarget& rt, const sf::Font& font,
     float qpy = static_cast<float>(H) - 76.f;
     Renderer::drawPanel(rt, qpx, qpy, QPW, 58.f);
     Renderer::drawText(rt, font,
-        "\"The youth is the hope of the fatherland.\"",
+        "\"Ang kabataan ang pag-asa ng bayan.\"",
         W / 2.f, qpy + 10.f, 16, Palette::TEXT_DIM, false, true);
-    Renderer::drawText(rt, font, "— Jose Rizal",
+    Renderer::drawText(rt, font, "- Jose Rizal",
         W / 2.f, qpy + 34.f, 15, Palette::TEXT_GOLD, true, true);
 }
 
