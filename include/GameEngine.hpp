@@ -1,8 +1,6 @@
 #pragma once
 
-// ╔══════════════════════════════════════════════════════════════════╗
-// ║                   DUNOPIA — GameEngine.hpp                       ║
-// ╚══════════════════════════════════════════════════════════════════╝
+// GameEngine.hpp                       
 
 #include <SFML/Graphics.hpp>
 #include <memory>

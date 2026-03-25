@@ -1,6 +1,5 @@
-// ╔══════════════════════════════════════════════════════════════════╗
-// ║                    DUNOPIA — Renderer.cpp                        ║
-// ╚══════════════════════════════════════════════════════════════════╝
+
+//  Renderer.cpp                        
 
 #include "Renderer.hpp"
 #include <algorithm>
@@ -9,7 +8,7 @@
 namespace Renderer
 {
 
-// ── Primitives ────────────────────────────────────────────────────────
+//  Primitives
 sf::RectangleShape rect(float x, float y, float w, float h, sf::Color fill)
 {
     sf::RectangleShape r({w, h});
@@ -55,7 +54,7 @@ void drawTextShadow(sf::RenderTarget& rt, const sf::Font& font,
     rt.draw(t);
 }
 
-// ── Growtopia-style panels ────────────────────────────────────────────
+//  Panels
 void drawPanel(sf::RenderTarget& rt, float x, float y, float w, float h)
 {
     rt.draw(rect(x - 3, y - 3, w + 6, h + 6, Palette::UI_BORDER));
@@ -97,7 +96,7 @@ void drawButton(sf::RenderTarget& rt, float x, float y, float w, float h,
     rt.draw(rect(x + w - 3, y + shift, 3, h, darken(base, 55)));
 }
 
-// ── Tile drawing ──────────────────────────────────────────────────────
+// Tile drawing
 void drawBevelBlock(sf::RenderTarget& rt, float x, float y,
                     float w, float h, sf::Color base)
 {
@@ -172,7 +171,7 @@ void drawQBlockTile(sf::RenderTarget& rt, float x, float y,
     rt.draw(rect(qx + T*0.12f, qy + 20.f,  T * 0.14f, 5.f, Palette::TEXT_GOLD));
 }
 
-// ── Flag ──────────────────────────────────────────────────────────────
+// Flag
 void drawFlag(sf::RenderTarget& rt, float x, float groundY)
 {
     float poleH = static_cast<float>(Config::TILE * 7);
@@ -196,7 +195,7 @@ void drawFlag(sf::RenderTarget& rt, float x, float groundY)
     rt.draw(sun);
 }
 
-// ── Heart ─────────────────────────────────────────────────────────────
+// Hearts
 void drawHeart(sf::RenderTarget& rt, float x, float y,
                float size, sf::Color c)
 {
@@ -218,7 +217,7 @@ void drawHeart(sf::RenderTarget& rt, float x, float y,
     rt.draw(tri);
 }
 
-// ── José Rizal sprite ─────────────────────────────────────────────────
+// José Rizal sprite
 void drawRizal(sf::RenderTarget& rt, float ox, float oy, float scale)
 {
     auto px = [&](float x, float y, float w, float h, sf::Color c) {
@@ -244,7 +243,7 @@ void drawRizal(sf::RenderTarget& rt, float ox, float oy, float scale)
     px(15, 60, 13,  6, Palette::SHOES);
 }
 
-// ── Spanish Colonizer sprite ──────────────────────────────────────────
+// Spanish soldier sprite (enemy)
 void drawEnemy(sf::RenderTarget& rt, float ox, float oy, float scale)
 {
     auto px = [&](float x, float y, float w, float h, sf::Color c) {
@@ -271,4 +270,4 @@ void drawEnemy(sf::RenderTarget& rt, float ox, float oy, float scale)
     px(14, 57, 13,  7, Palette::SHOES);
 }
 
-} // namespace Renderer
+} 

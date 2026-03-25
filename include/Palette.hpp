@@ -1,9 +1,7 @@
 #pragma once
 
-// ╔══════════════════════════════════════════════════════════════════╗
-// ║                    DUNOPIA — Palette.hpp                         ║
-// ║    Growtopia-inspired dark UI + vibrant world colors             ║
-// ╚══════════════════════════════════════════════════════════════════╝
+//  Palette.hpp                         
+
 
 #include <SFML/Graphics.hpp>
 

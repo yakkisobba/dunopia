@@ -1,6 +1,5 @@
-// ╔══════════════════════════════════════════════════════════════════╗
-// ║                  DUNOPIA — TriviaOverlay.cpp                     ║
-// ╚══════════════════════════════════════════════════════════════════╝
+
+//  TriviaOverlay.cpp                     
 
 #include "TriviaOverlay.hpp"
 #include "Renderer.hpp"
@@ -44,7 +43,7 @@ void TriviaOverlay::draw(sf::RenderTarget& rt, const sf::Font& font,
                                11.f, 11.f, dots[i]));
 
     Renderer::drawTextShadow(rt, font,
-                              "PHILIPPINE HISTORY TRIVIA",
+                              "ALAM MO BA?",
                               W / 2.f, py + 13.f, 20,
                               Palette::TEXT_GOLD, true, true);
 

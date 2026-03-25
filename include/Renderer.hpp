@@ -1,9 +1,7 @@
 #pragma once
 
-// ╔══════════════════════════════════════════════════════════════════╗
-// ║                    DUNOPIA — Renderer.hpp                        ║
-// ║    Stateless drawing helpers — declarations                      ║
-// ╚══════════════════════════════════════════════════════════════════╝
+//  Renderer.hpp                        
+
 
 #include <SFML/Graphics.hpp>
 #include <string>

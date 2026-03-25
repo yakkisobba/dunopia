@@ -1,6 +1,6 @@
-// ╔══════════════════════════════════════════════════════════════════╗
-// ║                      DUNOPIA — HUD.cpp                           ║
-// ╚══════════════════════════════════════════════════════════════════╝
+
+//  HUD.cpp                           
+
 
 #include "HUD.hpp"
 #include "Renderer.hpp"
@@ -19,7 +19,7 @@ void HUD::draw(sf::RenderTarget& rt, const sf::Font& font,
     drawProgressPanel(rt, font, playerX, goalX, levelIdx, totalLevels);
 }
 
-// ── Score panel (top-left) ────────────────────────────────────────────
+//  Score panel 
 void HUD::drawScorePanel(sf::RenderTarget& rt, const sf::Font& font,
                           const Player& player,
                           const std::string& levelName)
@@ -40,7 +40,7 @@ void HUD::drawScorePanel(sf::RenderTarget& rt, const sf::Font& font,
                               Palette::TEXT_MAIN, true);
 }
 
-// ── Hearts (top-center) ────────────────────────────────────────────────
+// Hearts panel
 void HUD::drawLives(sf::RenderTarget& rt, int lives)
 {
     constexpr float HEART_SZ  = 22.f;
@@ -60,7 +60,7 @@ void HUD::drawLives(sf::RenderTarget& rt, int lives)
     }
 }
 
-// ── Progress bar (top-right) ───────────────────────────────────────────
+// Progress bar
 void HUD::drawProgressPanel(sf::RenderTarget& rt, const sf::Font& font,
                              float playerX, float goalX,
                              int levelIdx, int totalLevels)

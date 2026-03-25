@@ -1,18 +1,7 @@
 #pragma once
 
-// ╔══════════════════════════════════════════════════════════════════╗
-// ║                      DUNOPIA — Level.hpp                         ║
-// ║                                                                  ║
-// ║  Q-block design:                                                 ║
-// ║    'Q' tiles ARE solid in the tile map.                          ║
-// ║    Player must have clear air BELOW a Q row to run under it.     ║
-// ║    When player's head hits a Q tile from below, GameEngine       ║
-// ║    calls tryBumpQ(col,row) to get the trivia question index.     ║
-// ║                                                                  ║
-// ║  Enemy spawn design:                                             ║
-// ║    EnemySpawn{col, groundRow} — groundRow is the SOLID tile row  ║
-// ║    enemies stand ON. Spawn y = groundRow*TILE - ENEMY_H.         ║
-// ╚══════════════════════════════════════════════════════════════════╝
+//  Level.hpp                         
+
 
 #include <SFML/Graphics.hpp>
 #include <string>

@@ -1,6 +1,6 @@
-// ╔══════════════════════════════════════════════════════════════════╗
-// ║                   DUNOPIA — QuizManager.cpp                      ║
-// ╚══════════════════════════════════════════════════════════════════╝
+
+// QuizManager.cpp                      
+
 
 #include "QuizManager.hpp"
 
@@ -65,7 +65,7 @@ QuizManager::QuizManager()
         },
         {   // 11
             "What is the national language of the Philippines?",
-            {"Cebuano","Ilocano","Kapampangan","Filipino (Tagalog)"},
+            {"Cebuano","Ilocano","Kapampangan","Filipino"},
             3
         },
         {   // 12

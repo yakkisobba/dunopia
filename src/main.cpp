@@ -1,6 +1,4 @@
-// ╔══════════════════════════════════════════════════════════════════╗
-// ║                       DUNOPIA — main.cpp                         ║
-// ╚══════════════════════════════════════════════════════════════════╝
+//  main.cpp                         
 
 #include <SFML/Graphics.hpp>
 #include <cstdlib>
@@ -16,7 +14,7 @@
 #include "TriviaOverlay.hpp"
 #include "Particle.hpp"
 
-// ── Font loader ───────────────────────────────────────────────────────
+// Font loader 
 static sf::Font loadFont()
 {
     sf::Font f;
@@ -32,9 +30,7 @@ static sf::Font loadFont()
     return f;
 }
 
-// ══════════════════════════════════════════════════════════════════════
 //  TITLE SCREEN
-// ══════════════════════════════════════════════════════════════════════
 static void drawTitle(sf::RenderTarget& rt, const sf::Font& font, float timer)
 {
     int W = Config::SCREEN_W, H = Config::SCREEN_H;
@@ -96,10 +92,10 @@ static void drawTitle(sf::RenderTarget& rt, const sf::Font& font, float timer)
         rt.draw(Renderer::rect(static_cast<float>(gx), H - 76.f,
                                3.f, 6.f, sf::Color(22, 125, 22)));
 
-    // Large Rizal on left
+    // Rizal sprite
     Renderer::drawRizal(rt, 72.f, H - 72.f - 48.f, 2.f);
 
-    // ── Title panel ───────────────────────────────────────────────────
+    // Title panel
     constexpr float TPW = 590.f, TPH = 158.f;
     float tpx = W / 2.f - TPW / 2.f + 65.f;
     float tpy = 48.f;
@@ -121,7 +117,7 @@ static void drawTitle(sf::RenderTarget& rt, const sf::Font& font, float timer)
         W / 2.f + 65.f, tpy + 126.f, 20,
         Palette::TEXT_DIM, false, true);
 
-    // ── Controls panel ────────────────────────────────────────────────
+    // Controls panel
     constexpr float CPW = 560.f, CPH = 124.f;
     float cpx = W / 2.f - CPW / 2.f + 65.f;
     float cpy = static_cast<float>(H) - CPH - 20.f;
@@ -154,9 +150,7 @@ static void drawTitle(sf::RenderTarget& rt, const sf::Font& font, float timer)
             Palette::TEXT_GOLD, true, true);
 }
 
-// ══════════════════════════════════════════════════════════════════════
 //  LEVEL CLEAR
-// ══════════════════════════════════════════════════════════════════════
 static void drawLevelClear(sf::RenderTarget& rt, const sf::Font& font,
                             int score, int levelIdx, int total,
                             const ParticleSystem& fx)
@@ -183,9 +177,8 @@ static void drawLevelClear(sf::RenderTarget& rt, const sf::Font& font,
         W / 2.f, py + 152.f, 16, Palette::TEXT_DIM, false, true);
 }
 
-// ══════════════════════════════════════════════════════════════════════
+
 //  GAME OVER
-// ══════════════════════════════════════════════════════════════════════
 static void drawGameOver(sf::RenderTarget& rt, const sf::Font& font,
                           int score)
 {
@@ -212,15 +205,14 @@ static void drawGameOver(sf::RenderTarget& rt, const sf::Font& font,
         W / 2.f, py + 158.f, 18, Palette::TEXT_MAIN, false, true);
 }
 
-// ══════════════════════════════════════════════════════════════════════
+
 //  VICTORY
-// ══════════════════════════════════════════════════════════════════════
 static void drawVictory(sf::RenderTarget& rt, const sf::Font& font,
                          int score, const ParticleSystem& fx)
 {
     int W = Config::SCREEN_W, H = Config::SCREEN_H;
 
-    // Warm sunrise gradient
+    // Black background
     rt.draw(Renderer::rect(0, 0, W, H, sf::Color(0, 0, 0)));
 
     Renderer::drawRizal(rt, W / 2.f - 28.f, H / 2.f + 40.f, 2.f);
@@ -255,16 +247,15 @@ static void drawVictory(sf::RenderTarget& rt, const sf::Font& font,
         W / 2.f, qpy + 34.f, 15, Palette::TEXT_GOLD, true, true);
 }
 
-// ══════════════════════════════════════════════════════════════════════
+
 //  MAIN
-// ══════════════════════════════════════════════════════════════════════
 int main()
 {
     std::srand(static_cast<unsigned>(std::time(nullptr)));
 
     sf::RenderWindow window(
         sf::VideoMode(Config::SCREEN_W, Config::SCREEN_H),
-        "DUNOPIA — Filipino History Adventure",
+        "DUNOPIA",
         sf::Style::Titlebar | sf::Style::Close);
     window.setFramerateLimit(Config::FPS);
 
@@ -276,7 +267,7 @@ int main()
 
     while (window.isOpen())
     {
-        // ── Events ───────────────────────────────────────────────────
+        // Events
         sf::Event ev;
         while (window.pollEvent(ev))
         {
@@ -327,7 +318,7 @@ int main()
             }
         }
 
-        // ── Input ─────────────────────────────────────────────────────
+        // Input
         bool left  = sf::Keyboard::isKeyPressed(sf::Keyboard::Left)  ||
                      sf::Keyboard::isKeyPressed(sf::Keyboard::A);
         bool right = sf::Keyboard::isKeyPressed(sf::Keyboard::Right) ||
@@ -341,7 +332,7 @@ int main()
 
         engine.update(left, right, jumpEdge);
 
-        // ── Victory fireworks ─────────────────────────────────────────
+        // Victory fireworks 
         if (engine.phase == Phase::VICTORY)
         {
             victoryTimer += 1.f / Config::FPS;
@@ -358,17 +349,17 @@ int main()
             }
         }
 
-        // ── Render ────────────────────────────────────────────────────
+        // Render 
         window.clear(sf::Color(10, 8, 6));
 
         switch (engine.phase)
         {
-            // ── Title ──────────────────────────────────────────────────
+            // Title 
             case Phase::TITLE:
                 drawTitle(window, font, engine.titleTimer);
                 break;
 
-            // ── In-game ────────────────────────────────────────────────
+            // In-game 
             case Phase::PLAYING:
             case Phase::TRIVIA:
             case Phase::FEEDBACK:
@@ -416,12 +407,12 @@ int main()
                 break;
             }
 
-            // ── Game Over ──────────────────────────────────────────────
+            // Game Over 
             case Phase::GAME_OVER:
                 drawGameOver(window, font, engine.player.score);
                 break;
 
-            // ── Victory ────────────────────────────────────────────────
+            // Victory 
             case Phase::VICTORY:
                 drawVictory(window, font, engine.player.score, victoryFX);
                 break;

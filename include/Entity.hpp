@@ -1,9 +1,6 @@
 #pragma once
 
-// ╔══════════════════════════════════════════════════════════════════╗
-// ║                     DUNOPIA — Entity.hpp                         ║
-// ║   Abstract base for all game objects                             ║
-// ╚══════════════════════════════════════════════════════════════════╝
+// Entity.hpp                 
 
 #include <SFML/Graphics.hpp>
 #include "Constants.hpp"

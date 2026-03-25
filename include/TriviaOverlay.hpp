@@ -1,8 +1,7 @@
 #pragma once
 
-// ╔══════════════════════════════════════════════════════════════════╗
-// ║                  DUNOPIA — TriviaOverlay.hpp                     ║
-// ╚══════════════════════════════════════════════════════════════════╝
+// TriviaOverlay.hpp                     
+
 
 #include <SFML/Graphics.hpp>
 #include "QuizManager.hpp"

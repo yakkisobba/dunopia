@@ -1,14 +1,13 @@
-// ╔══════════════════════════════════════════════════════════════════╗
-// ║                      DUNOPIA — Level.cpp                         ║
-// ╚══════════════════════════════════════════════════════════════════╝
+
+// Level.cpp                         
+
 
 #include "Level.hpp"
 #include <cmath>
 #include <algorithm>
 
-// ══════════════════════════════════════════════════════════════════════
+
 //  Level — constructor
-// ══════════════════════════════════════════════════════════════════════
 Level::Level(const LevelDef& d) : def(d)
 {
     // Spawn enemies: feet rest on top of groundRow tile
@@ -34,7 +33,7 @@ Level::Level(const LevelDef& d) : def(d)
             }
 }
 
-// ── Raw tile (ignores used-Q state) ───────────────────────────────────
+// Raw tile 
 char Level::rawTileAt(int col, int row) const
 {
     if (col < 0 || col >= Config::LEVEL_COLS) return '#';
@@ -46,7 +45,7 @@ char Level::rawTileAt(int col, int row) const
     return r[col];
 }
 
-// ── Tile query (used Q shown as 'X', still solid) ─────────────────────
+// Tile query (used Q shown as 'X', still solid)
 char Level::tileAt(int col, int row) const
 {
     char t = rawTileAt(col, row);
@@ -58,13 +57,13 @@ char Level::tileAt(int col, int row) const
     return t;
 }
 
-// ── Solid test ────────────────────────────────────────────────────────
+// Solid test 
 bool Level::isSolid(char t)
 {
     return t == '#' || t == 'B' || t == 'S' || t == 'Q' || t == 'X';
 }
 
-// ── Bump a Q block → return trivia index, or -1 ──────────────────────
+// Bump a Q block → return trivia index, or -1 
 int Level::tryBumpQ(int col, int row)
 {
     auto it = qblocks.find({col, row});
@@ -75,14 +74,14 @@ int Level::tryBumpQ(int col, int row)
     return it->second.triviaIndex;
 }
 
-// ── Per-frame update (bump animations) ────────────────────────────────
+// Bump animation
 void Level::update()
 {
     for (auto& [coord, qs] : qblocks)
         if (qs.bumpTimer > 0) --qs.bumpTimer;
 }
 
-// ── Background: sky gradient + parallax hills ─────────────────────────
+// Background (sky + hills)
 void Level::drawBackground(sf::RenderTarget& rt, float camX) const
 {
     int W = Config::SCREEN_W, H = Config::SCREEN_H;
@@ -100,7 +99,7 @@ void Level::drawBackground(sf::RenderTarget& rt, float camX) const
             )));
     }
 
-    // Night: draw stars
+    // Night: stars
     if (sky[2] > sky[0] && sky[0] < 50)
     {
         srand(42);
@@ -116,7 +115,7 @@ void Level::drawBackground(sf::RenderTarget& rt, float camX) const
         }
     }
 
-    // Parallax hills (30 % camera speed)
+    // Parallax hills 
     float hOff = std::fmod(camX * 0.3f, 260.f);
     for (int m = -1; m < W / 260 + 2; ++m)
     {
@@ -132,7 +131,7 @@ void Level::drawBackground(sf::RenderTarget& rt, float camX) const
     }
 }
 
-// ── Terrain: draw visible tiles ───────────────────────────────────────
+// Terrain
 void Level::drawTerrain(sf::RenderTarget& rt, float camX) const
 {
     int T      = Config::TILE;
@@ -169,7 +168,7 @@ void Level::drawTerrain(sf::RenderTarget& rt, float camX) const
     }
 }
 
-// ── Flag ──────────────────────────────────────────────────────────────
+// Flag 
 void Level::drawFlag(sf::RenderTarget& rt, float camX) const
 {
     float fx = def.flagCol * Config::TILE - camX;
@@ -177,7 +176,7 @@ void Level::drawFlag(sf::RenderTarget& rt, float camX) const
     Renderer::drawFlag(rt, fx, groundY);
 }
 
-// ── Flag hit-box ──────────────────────────────────────────────────────
+// Flag hit-box 
 sf::FloatRect Level::flagBounds() const
 {
     int T = Config::TILE;
@@ -194,14 +193,13 @@ float Level::worldWidth() const
     return static_cast<float>(Config::LEVEL_COLS * Config::TILE);
 }
 
-// ══════════════════════════════════════════════════════════════════════
-//  LevelFactory::makeLevels()
+
+// LEVEL LAYOUTS
 //
 //  LAYOUT LEGEND:
 //   '.' air   '#' ground   'B' bamboo   'S' stone   'Q' question block
-// ══════════════════════════════════════════════════════════════════════
 
-// Pad/truncate to exactly LEVEL_COLS chars
+
 static std::string pad(std::string s)
 {
     while (static_cast<int>(s.size()) < Config::LEVEL_COLS) s += '.';
@@ -216,9 +214,9 @@ std::vector<LevelDef> makeLevels()
     std::vector<LevelDef> levels;
 
 
-    //  LEVEL 1 — Calamba, Laguna  (Day — Rizal's Birthplace)
+    //  LEVEL 1 — Calamba, Laguna  
     
-{
+    {
     LevelDef L;
     L.name          = "Calamba, Laguna";
     L.subtitle      = "Jose Rizal's Birthplace — 1861";
@@ -239,7 +237,7 @@ std::vector<LevelDef> makeLevels()
         pad(".............................................................."), // 8
         pad("##############################################################"), // 9
         pad("##############################################################"), //10
-        pad("##############################################################"), //11 safety
+        pad("##############################################################"), //11 
     };
 
     L.enemySpawns =
@@ -250,7 +248,7 @@ std::vector<LevelDef> makeLevels()
     };
 
     levels.push_back(L);
-}
+    }
 
 
     //  LEVEL 2 — Intramuros, Manila  
@@ -282,12 +280,12 @@ std::vector<LevelDef> makeLevels()
 
         L.enemySpawns =
         {
-            {5,  9},   // ground section 1
-            {9,  9},   // ground section 1
-            {18, 9},   // ground section 2
-            {34, 9},   // ground section 3
-            {49, 7},   // wall top 1
-            {53, 7},   // wall top 1
+            {13,  9},   
+            {16,  9},   
+            {18, 9},   
+            {34, 9},   
+            {49, 7},  
+            {53, 7},   
         };
 
         levels.push_back(L);
@@ -307,14 +305,14 @@ std::vector<LevelDef> makeLevels()
         L.mapRows =
         {
             pad(".............................................................."),// 0
-            pad(".................Q............................................"),// 1 top Q blocks
-            pad("..........................Q..................................."),// 2 AIR under row-1 Q
-            pad("..............................................SSQSS..........."),// 3 AIR
-            pad("...............SSSSS.........................................."),// 4 upper platforms
-            pad("..................SS...SSSSSSS................................"),// 5 AIR
-            pad("........SSQS......SS...SS............SSSSS.....SSS............."),// 6 Q blocks (reachable from row-7 platforms)
-            pad("..................SS...SS....................................."),// 7 mid platforms
-            pad("..................SS...SS....................................."),// 8 AIR (pit gap challenge)
+            pad(".................Q............................................"),// 1 
+            pad("..........................Q..................................."),// 2 
+            pad("..............................................SSQSS..........."),// 3 
+            pad("...............SSSSS.........................................."),// 4 
+            pad("..................SS...SSSSSSS................................"),// 5 
+            pad("........SSQS......SS...SS............SSSSS.....SSS............."),// 6 
+            pad("..................SS...SS....................................."),// 7 
+            pad("..................SS...SS....................................."),// 8 
             pad("####################...#######################################"),//9
             pad("####################...#######################################"),//10
             pad("####################...#######################################"),//11
@@ -322,7 +320,7 @@ std::vector<LevelDef> makeLevels()
 
         L.enemySpawns =
         {
-            {4,  9},
+            {9,  9},
             {14, 9},
             {34, 9},
             {39, 9},
@@ -335,4 +333,4 @@ std::vector<LevelDef> makeLevels()
     return levels;
 }
 
-} // namespace LevelFactory
+} 
