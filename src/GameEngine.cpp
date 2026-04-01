@@ -116,15 +116,13 @@ void GameEngine::update(bool left, bool right, bool jumpEdge)
 
     if (player.invTimer > 0) --player.invTimer;
 
-    // Fell into pit → die (Level 2 rule)
-    constexpr int GROUND_ROW = 10; // bottom solid row in your level
-    float deathY = (GROUND_ROW + 1) * Config::TILE;
-
+    // Fell into pit → die 
+    float deathY = static_cast<float>((Config::LEVEL_ROWS - 1)) * Config::TILE;
     if (player.y > deathY)
     {
         onPlayerHit();
         return;
-    }
+    }   
 
     // ── Q-block head-bump ─────────────────────────────────────────────
     if (hitBelow)

@@ -38,7 +38,7 @@ char Level::rawTileAt(int col, int row) const
 {
     if (col < 0 || col >= Config::LEVEL_COLS) return '#';
     if (row < 0)                               return '.';
-    if (row >= Config::LEVEL_ROWS)             return '#';
+    if (row >= Config::LEVEL_ROWS)             return '.';
     if (row >= static_cast<int>(def.mapRows.size())) return '.';
     const auto& r = def.mapRows[row];
     if (col >= static_cast<int>(r.size()))     return '.';
